@@ -5,7 +5,6 @@ const int red_Led = 2;
 const int green_Led = 3;
 const int yellow_Led = 4;
 int heart_rate;
-
 //Fonctions setup
 void setup(){
     pinMode(red_Led, OUTPUT);
@@ -13,6 +12,7 @@ void setup(){
     pinMode(yellow_Led, OUTPUT);
 }
 void loop(){
+
     while (heart_rate >= 150){
         digitalWrite(red_Led, HIGH);
         delay(500);
