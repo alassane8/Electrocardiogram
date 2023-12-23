@@ -1,4 +1,10 @@
-# Electrocardigram
+<h1 align="center">
+  Alassane WADE Electrocardiogram
+</h1> 
+<h2 align="center">
+                                       "⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋ "
+</h2> 
+
 The heart rate monitor is a device that allows measuring the heart rate, i.e., 
 the number of heartbeats per minute. It is used for medical as well as sports purposes, 
 to develop personalized training programs. The first heart rate monitor was invented in 1977 
