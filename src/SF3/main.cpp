@@ -4,7 +4,7 @@
 const int red_Led = 2;
 const int green_Led = 3;
 const int yellow_Led = 4;
-int heart_rate;
+int heart_rate= 150;
 
 //Functions setup
 void setup(){

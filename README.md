@@ -35,3 +35,7 @@ cardiac.
 • SF4: Beeper the heartbeat
 • SF5: Show time, heart rate and PPG
 • SF6: Record and view patient data
+
+## Area for improvement
+Here, you can find the features I am currently working on in this repository.
+This allows you to be aware of the changes that are to come and see what needs to be improve. 
