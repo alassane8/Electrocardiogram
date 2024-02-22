@@ -2,7 +2,7 @@
   Alassane WADE Electrocardiogram
 </h1> 
 <h2 align="center">
-                                       "⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋ "
+"⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋ "
 </h2> 
 
 The heart rate monitor is a device that allows measuring the heart rate, i.e., 
