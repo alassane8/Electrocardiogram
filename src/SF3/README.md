@@ -1,7 +1,9 @@
 # SF3 Display user health informations
 Secondary function SF3 "Display Patient Status" illuminates a red, green, or yellow indicator based on the heart rate.
 
-<img align="center" width="500" alt="SF3" src="https://github.com/alassane8/Electrocardiogram/blob/main/images/SF3.PNG">
+<h1 align="center">
+    <img  width="500" alt="SF3" src="https://github.com/alassane8/Electrocardiogram/blob/main/images/SF3.PNG">
+</h1>
 
 Link to the project: "https://wokwi.com/projects/392779133284150273"
 
