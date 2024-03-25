@@ -1,6 +1,8 @@
 # SF2 The clock
 Secondary function SF2 measures time and enables knowing the current time at any moment.
 
+Link to project: https://wokwi.com/projects/393333851782519809
+
 ## Technical Requirements
 ### TR2.1 The clock must drift a maximum of 3 seconds per day.
 
