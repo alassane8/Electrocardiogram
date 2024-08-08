@@ -1,82 +1,89 @@
 #include <Adafruit_SSD1306.h>
 #include <Arduino.h>
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGH 64
-#include <TimeLib.h>
 #include <ThreeWire.h>  
 #include <RtcDS1302.h>
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGH, &Wire, -1);
 
-ThreeWire myWire(10,11,2); // 10 : DAT ; 11 = CLK ;2= RST
+// OLED display parameters
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+
+// Define pins for the DS1302 module
+#define DAT_PIN 10
+#define CLK_PIN 11
+#define RST_PIN 2
+
+ThreeWire myWire(DAT_PIN, CLK_PIN, RST_PIN); // (DAT, CLK, RST)
 RtcDS1302<ThreeWire> Rtc(myWire);
 
-const int LedRouge = 6;
-const int LedJaune = 5;
-const int LedVerte = 7;
-int bpm = 0;
+// Struct to store the time and date
+struct Temps {
+  int jour;
+  int mois;
+  int annee;
+  int heure;
+  int min;
+  int sec;
+};
 
-void setup () 
-{
-    pinMode(LedRouge, OUTPUT);
-    pinMode(LedJaune, OUTPUT);
-    pinMode(LedVerte, OUTPUT);
-    Serial.begin(9600);
+// Function prototypes
+Temps getTime();
+void printTime(Temps t);
 
-    Serial.print("compiled: ");
-    Serial.print(__DATE__);
-    Serial.println(__TIME__);
-     if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
-    Serial.println("SSD1306 allocation failed");
-    for(;;);
-    }
-    Rtc.Begin();
-    RtcDateTime compiled = RtcDateTime(__DATE__, __TIME__);
-    Serial.println();
-    RtcDateTime now = Rtc.GetDateTime();
-    if (now < compiled) 
-    {
-        Serial.println("RTC is older than compile time!  (Updating DateTime)");
-        Rtc.SetDateTime(compiled);
-    }
-   
-}
+void setup() {
+  // Initialize serial communication
+  Serial.begin(9600);
 
-void loop () 
-{
-  if (bpm > 60 && bpm < 100 )
-  {
-    digitalWrite(LedVerte, HIGH);
-    delay(500); 
-    digitalWrite(LedVerte, LOW);
-    delay(500);
+  // Initialize the OLED display
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3C for 128x64
+    Serial.println(F("SSD1306 allocation failed"));
+    for (;;); // Don't proceed, loop forever
   }
-  else if (bpm < 60)
-  {    
-    digitalWrite(LedJaune, HIGH); 
-    delay(500); 
-    digitalWrite(LedJaune, LOW);
-    delay(500);
-  }
-  else
-  {
-    digitalWrite(LedRouge, HIGH);
-    delay(500); 
-    digitalWrite(LedRouge, LOW);
-    delay(500);
-  }
-
-  RtcDateTime now = Rtc.GetDateTime();
-
   display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-  display.setCursor(0,10);
-  display.print(now.Hour(),DEC);
-  display.print(":");
-  display.print(now.Minute(),DEC);
-  display.print(":");
-  display.print(now.Second(),DEC);
-  display.print(":");
-  display.display();
+
+  // Initialize the RTC
+  // Set initial time (uncomment if you need to set the time)
+  // Rtc.SetDateTime(RtcDateTime(2022, 11, 16, 0, 0, 0)); // YYYY, MM, DD, HH, MM, SS
+
+  // Print the initial time to serial monitor
+  Temps t = getTime();
+  printTime(t);
 }
 
+Temps getTime() {
+  RtcDateTime now = Rtc.GetDateTime();
+  Temps t;
+  t.jour = now.Day();
+  t.mois = now.Month();
+  t.annee = now.Year();
+  t.heure = now.Hour();
+  t.min = now.Minute();
+  t.sec = now.Second();
+  return t;
+}
+
+void printTime(Temps t) {
+  // Print date
+  Serial.print(t.jour);
+  Serial.print("/");
+  Serial.print(t.mois);
+  Serial.print("/");
+  Serial.print(t.annee);
+  Serial.println();
+
+  // Print time
+  Serial.print(t.heure);
+  Serial.print(":");
+  Serial.print(t.min);
+  Serial.print(":");
+  Serial.print(t.sec);
+  Serial.println();
+}
+
+void loop() {
+  Temps t = getTime();
+  printTime(t);
+
+  // Add a 1-second delay between readings
+  delay(1000);
+}
